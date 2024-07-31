@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Cuanto lleva Alvaro?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(32, 0, 119, 0.1);
+        }
+        .time {
+            font-size: 2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tiempo sin 🚬</h1>
+        <div class="time" id="countup">Loading...</div>
+    </div>
+
+    <script>
+        // Duración inicial en milisegundos (3 días y medio)
+        const initialDuration = 3.5 * 24 * 60 * 60 * 1000;
+
+        // Fecha y hora de inicio
+        const startTime = new Date().getTime() - initialDuration;
+
+        // Función para actualizar el cronómetro
+        function updateCountup() {
+            const now = new Date().getTime();
+            const elapsed = now - startTime;
+
+            const totalSeconds = Math.floor(elapsed / 1000);
+            const years = Math.floor(totalSeconds / (365 * 24 * 60 * 60));
+            const months = Math.floor((totalSeconds % (365 * 24 * 60 * 60)) / (30 * 24 * 60 * 60));
+            const days = Math.floor((totalSeconds % (30 * 24 * 60 * 60)) / (24 * 60 * 60));
+            const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+            const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            const seconds = Math.floor(totalSeconds % 60);
+
+            document.getElementById("countup").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        // Actualizar el cronómetro cada segundo
+        setInterval(updateCountup, 1000);
+        // Actualizar el cronómetro inmediatamente
+        updateCountup();
+    </script>
+</body>
+</html>
